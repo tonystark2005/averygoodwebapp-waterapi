@@ -26,7 +26,7 @@ describe('WaterApi', () => {
 			if (shouldLogResponse) {
 				console.log('GET /api/1/album/posts', result.data.length)
 			}
-
+			console.log("A--",result.data)
 			expect(result.status).toEqual(200)
 			expect(Array.isArray(result.data)).toBe(true)
 			expect(result.data[0].hasOwnProperty('id')).toBe(true)
@@ -36,6 +36,7 @@ describe('WaterApi', () => {
 	})
 	describe('When an author signs in', () => {
 		it('should trigger a magicLink email messsage', async () => {
+			console.log("B1----")
 			const { environmentUrl } = config
 			const headers = {
 				headers: {
@@ -50,6 +51,7 @@ describe('WaterApi', () => {
 			if (shouldLogResponse) {
 				console.log(`POST /api/1/admin/magic-link`, result.status)
 			}
+			console.log("B--",result.data)
 			expect(result.status).toEqual(204)
 			authorizationHash = result.headers['x-amzn-remapped-authorization']
 			console.log(authorizationHash)

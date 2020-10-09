@@ -2,9 +2,14 @@
 # $2 PROFILE
 ENVIRONMENT=${1:-dev}
 AWS_PROFILE=$2
-[[ $ENVIRONMENT = 'prod' ]] && ENV_FILE=.env.production || ENV_FILE=.env.development
+#[[ $ENVIRONMENT = 'prod' ]] && ENV_FILE=.env.production || ENV_FILE=.env.development
+if [ $ENVIRONMENT = 'prod' ]]; then
+    ENV_FILE=.env.production
+else
+    ENV_FILE=.env.development
+fi
 export $(grep -v '^#' $ENV_FILE | xargs)
-NAMESPACE=$(sed -e "s,\.,-," <<< $DOMAIN_NAME)
+#NAMESPACE=$(sed -e "s,\.,-," <<< $DOMAIN_NAME)
 PROJECT="$NAMESPACE-$ENVIRONMENT"-waterapi-api
 DEPLOYMENT_BUCKET=$PROJECT
 
